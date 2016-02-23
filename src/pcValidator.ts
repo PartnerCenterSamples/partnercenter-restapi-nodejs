@@ -3,6 +3,7 @@
 import * as http from 'http';
 import * as debug from 'debug';
 import * as config from 'nconf';
+import {Const} from './const';
 import * as Q from 'q';
 import * as request from 'request';
 import * as uuid from 'node-uuid';
@@ -23,7 +24,7 @@ export class PartnerCenterValidator {
 
     let deferred: Q.Deferred<boolean> = Q.defer<boolean>();
 
-    let queryUrl: string = 'https://partnercenterapi.store.microsoft.com/v1/validations/checkdomainavailability/' + domain;
+    let queryUrl: string = Const.PartnerCenterApiEndpoint + '/v1/validations/checkdomainavailability/' + domain;
 
     // create headers for the request
     let requestHeaders: request.Headers = <request.Headers>{

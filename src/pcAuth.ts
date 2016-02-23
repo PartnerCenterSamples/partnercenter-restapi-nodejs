@@ -3,6 +3,7 @@
 import * as http from 'http';
 import * as debug from 'debug';
 import * as config from 'nconf';
+import {Const} from './const';
 import * as Q from 'q';
 import * as request from 'request';
 let urlEncode: any = require('form-urlencoded');
@@ -29,7 +30,7 @@ export class PartnerCenterAuth {
     };
     let encodedPayload: string = urlEncode(payload);
 
-    let queryUrl: string = 'https://partnercenterapi.store.microsoft.com/GenerateToken';
+    let queryUrl: string = Const.PartnerCenterApiEndpoint + '/GenerateToken';
 
     // create headers for the request
     let requestHeaders: request.Headers = <request.Headers>{

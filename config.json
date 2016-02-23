@@ -1,13 +1,9 @@
 {
-  "auth-type": "appuser",
+  "auth-type": "apponly",
   "aad-tenant-id": "",
   "partner-username": "",
   "partner-password": "",
   "aad-app-appuser-client-id": "",
   "aad-app-apponly-client-id": "",
-  "aad-app-apponly-client-secret": "",
-  "aad-graph-endpoint-url": "https://graph.windows.net",
-  "aad-graph-resource-id": "https://graph.windows.net",
-  "partnercenter-endpoint-url": "https://partnerapi.store.microsoft.com",
-  "partnercenter-resource-id": "https://partnerapi.store.microsoft.com"
+  "aad-app-apponly-client-secret": ""
 }

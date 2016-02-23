@@ -2,6 +2,7 @@
 
 import * as debug from 'debug';
 import * as config from 'nconf';
+import {Const} from './const';
 import * as Q from 'q';
 let adal: any = require('adal-node');
 
@@ -31,14 +32,14 @@ export class AadAuth {
     let deferred: Q.Deferred<string> = Q.defer<string>();
 
     // build the login authority
-    let adalAuthority: string = 'https://login.microsoftonline.com';
+    let adalAuthority: string = Const.AzureAdAuthority;
     let tenantId: string = config.get('aad-tenant-id');
     let authority: string = adalAuthority + '/' + tenantId;
     let authContext: any = new adal.AuthenticationContext(authority);
 
     // login as an app
     authContext.acquireTokenWithClientCredentials(
-      config.get('aad-graph-resource-id'),
+      Const.AzureGraphApiResourceId,
       config.get('aad-app-apponly-client-id'),
       config.get('aad-app-apponly-client-secret'),
       (error: Error, tokenResponse: any) => {
@@ -60,14 +61,14 @@ export class AadAuth {
     let deferred: Q.Deferred<string> = Q.defer<string>();
 
     // build the login authority
-    let adalAuthority: string = 'https://login.microsoftonline.com';
+    let adalAuthority: string = Const.AzureAdAuthority;
     let tenantId: string = config.get('aad-tenant-id');
     let authority: string = adalAuthority + '/' + tenantId;
     let authContext: any = new adal.AuthenticationContext(authority);
 
     // login as a user
     authContext.acquireTokenWithUsernamePassword(
-      config.get('partnercenter-resource-id'),
+      Const.PartnerCenterApiResourceId,
       config.get('partner-username'),
       config.get('partner-password'),
       config.get('aad-app-appuser-client-id'),

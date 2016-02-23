@@ -3,6 +3,7 @@
 import * as http from 'http';
 import * as debug from 'debug';
 import * as config from 'nconf';
+import {Const} from './const';
 import * as Q from 'q';
 import * as request from 'request';
 import * as uuid from 'node-uuid';
@@ -23,7 +24,7 @@ export class PartnerCenterCustomers {
 
     let deferred: Q.Deferred<string> = Q.defer<string>();
 
-    let queryUrl: string = 'https://partnercenterapi.store.microsoft.com/v1/customers';
+    let queryUrl: string = Const.PartnerCenterApiEndpoint + '/v1/customers';
 
     // create headers for the request
     let requestHeaders: request.Headers = <request.Headers>{
@@ -43,6 +44,17 @@ export class PartnerCenterCustomers {
             (error: any, response: http.IncomingMessage, body: any) => {
               if (error) {
                 deferred.reject(error);
+              } else if (response.statusCode !== 200) {
+                let errorMessage: string = '';
+
+                // if not 200, then check if trying to get customers as apponly
+                if (response.statusCode === 403 && config.get('auth-type')) {
+                  errorMessage = '[403 FORBIDDEN] Cannot get list of customers using apponly authentication.';
+                } else {
+                  errorMessage = '[' + response.statusCode + ']' + response.statusMessage;
+                }
+
+                deferred.reject(new Error(errorMessage));
               } else {
                 let stripped: string = body.substring(2, body.length);
                 let converted: Buffer = encoding.convert(stripped, 'UTF-8', 'UTF-16');

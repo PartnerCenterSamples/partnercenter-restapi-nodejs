@@ -10,7 +10,8 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "DEBUG=partnercenter* nodemon --debug ./src/index.js",
+    "start": "npm run build && node ./src/index.js",
+    "start:debug": "DEBUG=partnercenter* nodemon --debug ./src/index.js",
     "build": "tsc",
     "prebuild": "rm -rf typings && typings install"
   },

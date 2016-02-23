@@ -62,9 +62,9 @@ loginToAAD
   })
   .then((domainAvailable: boolean) => {
     if (domainAvailable) {
-      console.log(chalk.green('.. domain is avaialble.'));
+      console.log(chalk.green('.. domain is available.'));
     } else {
-      console.log(chalk.yellow('.. domain is NOT avaialble.'));
+      console.log(chalk.yellow('.. domain is NOT available.'));
     }
 
     // use partner center token to get customers
@@ -73,8 +73,8 @@ loginToAAD
     return pcCustomers.get();
   })
   .then((customers: any) => {
-    let CliTable: any = require('cli-table');
-    let table: any = new CliTable({
+    let cliTable: any = require('cli-table');
+    let table: any = new cliTable({
       head: ['ID', 'Name', 'Domain', 'Tenant ID']
     });
     // write customers out
@@ -89,7 +89,7 @@ loginToAAD
     console.log(table.toString());
   })
   .catch((error: Error) => {
-    console.error(chalk.red('AN UNHANDLED ERROR OCCURRED >>>> \n' + error.message), error);
+    console.error(chalk.red('AN ERROR OCCURRED >>>> \n' + error.message));
   })
   .finally(() => {
     console.log(chalk.white('Finished with Partner Center sample!'));
