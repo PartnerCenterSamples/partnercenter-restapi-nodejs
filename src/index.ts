@@ -55,7 +55,7 @@ loginToAAD
     console.log(chalk.green('.. obtained Partner Center access token.'));
 
     // validate a domain availability
-    let domainToCheck: string = 'wingtiptoys02';
+    let domainToCheck: string = 'wingtiptoys';
     console.log(chalk.white('Checking if the domain \'' + domainToCheck + '\' is available...'));
     let validator: PartnerCenterValidator = new PartnerCenterValidator(pcToken);
     return validator.checkDomain(domainToCheck);
@@ -71,6 +71,22 @@ loginToAAD
     console.log(chalk.white('Getting list of customers...'));
     let pcCustomers: PartnerCenterCustomers = new PartnerCenterCustomers(pcToken);
     return pcCustomers.get();
+  })
+  .then((customers: any) => {
+    let CliTable: any = require('cli-table');
+    let table: any = new CliTable({
+      head: ['ID', 'Name', 'Domain', 'Tenant ID']
+    });
+    // write customers out
+    customers.forEach((customer: any) => {
+      table.push([
+        customer.id,
+        customer.companyProfile.companyName,
+        customer.companyProfile.domain,
+        customer.companyProfile.tenantId
+      ]);
+    });
+    console.log(table.toString());
   })
   .catch((error: Error) => {
     console.error(chalk.red('AN UNHANDLED ERROR OCCURRED >>>> \n' + error.message), error);

@@ -6,8 +6,7 @@ import * as config from 'nconf';
 import * as Q from 'q';
 import * as request from 'request';
 import * as uuid from 'node-uuid';
-
-let utf8: any = require('utf8');
+let encoding: any = require('encoding');
 
 export class PartnerCenterValidator {
   private log: debug.Debugger = debug('partnercenter');
@@ -38,25 +37,16 @@ export class PartnerCenterValidator {
     // issue request
     request(queryUrl,
             <request.CoreOptions>{
-              encoding: null,
               headers: requestHeaders,
               method: 'GET'
               },
-            (error: any, response: http.IncomingMessage, body: Buffer) => {
+            (error: any, response: http.IncomingMessage, body: any) => {
               if (error) {
                 deferred.reject(error);
               } else {
-                let StringDecoder: any = require('string_decoder').StringDecoder;
-                let decoder: any = new StringDecoder('utf8');
-                let decodedBody: any = decoder.write(body);
-                console.log('body decoded', decodedBody);
-                let tweakedBody: string = decodedBody.substring(2, decodedBody.length);
-                console.log('tweaked', tweakedBody);
-                tweakedBody = tweakedBody.toLowerCase();
-                console.log('true=', tweakedBody);
-                // this should be true! clearly something is odd with the `tweakedBody` contents... it's not a valid 'true' string
-                console.log('evaluated', (tweakedBody === 'true'));
-                deferred.resolve(false);
+                let stripped: string = body.substring(2, body.length);
+                let converted: Buffer = encoding.convert(stripped, 'UTF-8', 'UTF-16');
+                deferred.resolve((converted.toString() === 'true'));
               }
     });
 
