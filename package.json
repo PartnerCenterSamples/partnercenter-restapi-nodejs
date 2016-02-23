@@ -1,0 +1,44 @@
+{
+  "name": "partnercenter-restapi-nodejs",
+  "description": "Sample code calling the Partner Center APIs with Node.js",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Andrew Connell",
+    "email": "me@andrewconnell.com",
+    "url": "http://www.andrewconnell.com"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=partnercenter* nodemon --debug ./src/index.js",
+    "build": "tsc",
+    "prebuild": "rm -rf typings && typings install"
+  },
+  "homepage": "https://github.com/PartnerCenterSamples/partnercenter-restapi-nodejs#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PartnerCenterSamples/partnercenter-restapi-nodejs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/PartnerCenterSamples/partnercenter-restapi-nodejs/issues"
+  },
+  "keywords": [
+    "partner center",
+    "partnercenter",
+    "nodejs",
+    "csp",
+    "cloud solution provider"
+  ],
+  "dependencies": {
+    "adal-node": "^0.1.18",
+    "chalk": "^1.1.1",
+    "debug": "^2.2.0",
+    "form-urlencoded": "^1.2.0",
+    "nconf": "^0.8.4",
+    "node-uuid": "^1.4.7",
+    "q": "^1.4.1",
+    "request": "^2.69.0",
+    "request-debug": "^0.2.0",
+    "utf8": "^2.1.1"
+  }
+}

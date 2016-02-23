@@ -1,0 +1,16 @@
+{
+  "name": "partnercenter-restapi-nodejs",
+  "dependencies": {
+    "chalk": "github:typed-typings/npm-chalk#a7e422c5455e70292e5675a727d43a7b05fc3e58",
+    "debug": "github:typed-typings/npm-debug#0e398cb21de268744dd048a11461be5c13230bad"
+  },
+  "devDependencies": {},
+  "ambientDependencies": {
+    "Q": "github:DefinitelyTyped/DefinitelyTyped/q/Q.d.ts#4de74cb527395c13ba20b438c3a7a419ad931f1c",
+    "form-data": "github:DefinitelyTyped/DefinitelyTyped/form-data/form-data.d.ts#bb1b99052bf1d697f0368fbff56898bc1f5a525c",
+    "nconf": "github:DefinitelyTyped/DefinitelyTyped/nconf/nconf.d.ts#33f3569c9528e917b5fbc24922c4b17eac251f58",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#263705d313346e093d95cb62cef6fed848e46978",
+    "node-uuid": "github:DefinitelyTyped/DefinitelyTyped/node-uuid/node-uuid.d.ts#ed38db403a56da84731a6f77b545762ee477a45b",
+    "request": "github:DefinitelyTyped/DefinitelyTyped/request/request.d.ts#90c7b5653c973cbc8c568ba33c8a04fb478525ee"
+  }
+}
