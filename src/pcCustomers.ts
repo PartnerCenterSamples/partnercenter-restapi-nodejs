@@ -41,7 +41,7 @@ export class PartnerCenterCustomers {
               headers: requestHeaders,
               method: 'GET'
             },
-            (error: any, response: http.IncomingMessage, body: any) => {
+            (error: any, response: http.IncomingMessage, body: string) => {
               if (error) {
                 deferred.reject(error);
               } else if (response.statusCode !== 200) {
@@ -56,9 +56,13 @@ export class PartnerCenterCustomers {
 
                 deferred.reject(new Error(errorMessage));
               } else {
+                // strip off BOM characters "FF FE" for UTF-16LE
                 let stripped: string = body.substring(2, body.length);
-                let converted: Buffer = encoding.convert(stripped, 'UTF-8', 'UTF-16');
+                // convert string from UTF-16LE => UTF-8
+                let converted: Buffer = encoding.convert(stripped, 'UTF-8', 'UTF-16LE');
+                // take UTF-8 string & parse as JSON
                 let json: any = JSON.parse(converted.toString());
+
                 deferred.resolve(json.items);
               }
             });
